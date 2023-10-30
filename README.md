@@ -28,6 +28,10 @@ Player data is stored in the nbt storage gui:main container and is accessible fr
 The code can be executed in just two places:
 when opening the interface and clicking on the item. All items must be marked with the null:1b tag. Also, each item (optionally) stores its own array of commands that need to be executed when clicked.
 
+Datapack contains one example. To place it, use:
+```mcfunction
+function gui:gui/create/place {"folder":"test","getter":"0","type":"2","commands":[]}
+```
 **If you have any questions, write to me in discord. @mr_menelai**
 # Русский
 ### Размещение интерфейса в мире
