@@ -1,0 +1,7 @@
+{
+	"parent":"item/ui/root",
+	"textures":
+		{
+		"texture":"custom/ui/example"
+		}
+}

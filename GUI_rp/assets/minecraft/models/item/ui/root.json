@@ -1,0 +1,28 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"texture": "custom/ui/example"
+	},
+	"elements": [
+		{
+			"name": "PlaneX1",
+			"from": [7.25, 0, -13.25],
+			"to": [7.251, 18.25, 30.5],
+			"faces": {
+				"east": {"uv": [0, 0, 10.9375, 4.5625], "texture": "#texture"},
+				"west": {"uv": [0, 0, 10.9375, 4.5625], "texture": "#texture"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"ground": {
+			"scale": [0, 0, 0]
+		},
+		"gui": {
+			"rotation": [0, -90, 0],
+			"translation": [-70, 21, 0],
+			"scale": [0.0001, 3.985, 3.985]
+		}
+	}
+}
