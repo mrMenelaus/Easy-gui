@@ -1,0 +1,3 @@
+$execute if score @s type matches 2 run return run data modify storage gui:main container.contexts.$(folder) set from storage gui:main temp
+$execute if score @s type matches 0 run return run data modify storage gui:main container.contexts.$(folder)!!!$(number) set from storage gui:main temp
+$execute if score @s type matches 1 run data modify storage gui:main container.contexts.$(folder)$(number) set from storage gui:main temp

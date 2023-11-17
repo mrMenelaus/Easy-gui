@@ -1,2 +1,0 @@
-execute if score @s boolean matches 0 store result storage gui:main container.number int 1 run scoreboard players get @s page
-execute if score @s boolean matches 1 store result storage gui:main container.number int 1 run scoreboard players get @s ID

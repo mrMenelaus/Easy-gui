@@ -1,0 +1,1 @@
+$data modify storage gui:main container set from storage gui:main gui_cash.$(id)

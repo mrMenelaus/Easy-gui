@@ -1,2 +1,0 @@
-setblock ~ ~ ~ ender_chest
-$execute align xyz positioned ~0.5 ~0.5 ~0.5 summon marker run function gui:gui/create/post {"folder":"$(folder)","getter":"$(getter)","commands":$(commands),"type":"$(type)"}

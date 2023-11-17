@@ -1,2 +1,0 @@
-say 1
-$tellraw @s {"text":"Copy","color":"green","underlined": true,"clickEvent": {"action": "copy_to_clipboard","value":$(temp)},"hoverEvent": {"action": "show_text","contents": {"text": "ЛКМ","color": "green"}}}
