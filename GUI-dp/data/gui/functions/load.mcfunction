@@ -1,0 +1,15 @@
+scoreboard objectives add open.gui minecraft.custom:minecraft.open_enderchest
+scoreboard objectives add main_score dummy
+scoreboard objectives add components dummy
+scoreboard objectives add getter dummy
+scoreboard objectives add load+ dummy 
+scoreboard objectives add save+ dummy 
+scoreboard objectives add load dummy 
+scoreboard objectives add save dummy 
+scoreboard objectives add type dummy
+scoreboard objectives add page dummy
+scoreboard objectives add rate dummy
+scoreboard objectives add id dummy
+scoreboard objectives add ID dummy
+setblock 0 -63 0 minecraft:oak_sign
+setblock 0 -64 0 minecraft:purple_shulker_box
