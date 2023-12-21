@@ -1,2 +1,2 @@
-execute if score @s load matches 1 run return 1
-execute if score @s load+ matches 1 run return 1
+execute if data storage gui:main {container:{config:{use_load:1b}}} run return 1
+execute if data storage gui:main {container:{config:{use_load+:1b}}} run return 1
