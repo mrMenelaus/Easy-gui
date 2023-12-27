@@ -37,7 +37,6 @@ All page parameters from args instead of on_open are copied to the player when o
 | on_change  | array of strings-commands |        []        |
 |  on_close  | array of strings-commands |        []        |
 ### Parameter values
-#### Path Parameters
 To open a page, the framework concatenates the path to it using the following parameters:
 * folder — sets the path string to the interface in the storage.
 * type — defines how the path to the page will look like:
@@ -47,7 +46,6 @@ To open a page, the framework concatenates the path to it using the following pa
 * getter — optimizes paths.
     * false - player's score page will not be used(type=2b).
     * true - player's score page will be used(type=0b,1b).
-#### Page parameters
 * ignore_slots — slots where the player can place items.
 * use_components — determines whether an array of components will be added to the item on the page.
 * use_save — determines the saving of the put items.
@@ -63,7 +61,16 @@ To open a page, the framework concatenates the path to it using the following pa
     0 - do not upload.
     1 - upload.
 
-The page parameter are copied to the player's scoreboards of the same name. Other parameters are copied to the player's `container` storage. Later you can edit parameters using `data modify storage gui:main container.config.{folder,type,getter,ignore_slots,use_components,use_save,use_save+,use_load,use_load+} set value {value}`, `data modify storage storage gui:main container.{on_change,on_close,components} set value {value}`
+The page parameter are copied to the player's scoreboards of the same name. Other parameters are copied to the player's `container` storage. Later you can edit parameters using:
+```
+data modify storage gui:main container.config.{folder,type,getter,ignore_slots,use_components,use_save,use_save+,use_load,use_load+} set value {value}
+```
+```
+data modify storage storage gui:main container.{on_change,on_close,components} set value {value}
+```
+```
+scoreboard players set/add/remove @s page {value}
+```
 ## Creating pages
 A page in the framework is just an array of special items (see below), the same as, for example, a barrel, located in the gui:main storage. **All items and components on the page must be marked with the null:1b tag!**
 ## Button creation
@@ -106,41 +113,32 @@ search → open → compare → return → buttons → load → close
 
 # Russian
 Easy GUI — очень мощный фреймворк с солидной оптимизацией, позволяющий создавать сложные интерфейсы за считанные секунды.
-# Содержание
 1. [Размещение интерфейса в мире](#размещение-интерфейса-в-мире)
 2. [Параметры](#параметры)
 3. [Создание страниц](#создание-страниц)
 4. [Создание кнопок](#создание-кнопок)
-    1. [Тег commands](#тег-commands)
-    2. [Тег link](#тег-link)
+    * [Тег link](#тег-link)
+    * [Тег commands](#тег-commands)
 5. [Немного о работе фреймворка](#немного-о-работе-фреймворка)
-<<<<<<< HEAD
-=======
-6. [Примеры использования](#примеры-использования)
->>>>>>> d93d2fc3c861c4732a55dd895275cb002d58d65a
 ## Размещение интерфейса в мире
 Чтобы разместить интерфейс, запустите эту функцию:
 ```mcfunction
 function gui:gui/create/place {args:{config:{},else:{}}}
 ```
-Команде размещения доступны теги else типа массив строк on_open, on_change, on_close — команды, которые выполнятся при открытии, при любом изменению страницы и при закрытии соответственно. Также тег components для добавления первичных компонентов.
+Команде размещения доступны теги else: on_open, on_change, on_close — массив команд, которые выполнятся при открытии, при любом изменению страницы и при закрытии соответственно. Также тег components для добавления первичных компонентов.
 ## Параметры
 Все параметры будут скопированы в игрока при открытии. Функция размещения интерфейса имеет значения параметров по умолчанию. Единственный необходимый параметр — folder.
-### Таблица параметров
-#### Config параметры
 |   Параметр   |          Тип данных          | Значение по умолчанию |
 | :----------: | :--------------------------: | :-------------------: |
 |    folder    |            строка            | обязательный параметр |
-|     type     |     byte число от 0 до 2     |           2           |
+|     type     |     byte число от 0b до 2b     |           2b           |
 |    getter    |            булев             |         false         |
 | ignore_slots | массив byte чисел от 0 до 26 |          []           |
-|  components  |            булев             |         false         |
-|     save     |            булев             |         false         |
-|    save+     |            булев             |         false         |
-|     load     |            булев             |         false         |
-|    load+     |            булев             |         false         |
-### Значения параметров
-#### Параметры пути
+|  use_components  |            булев             |         false         |
+|     use_save     |            булев             |         false         |
+|    use_save+     |            булев             |         false         |
+|     use_load     |            булев             |         false         |
+|    use_load+     |            булев             |         false         |
 Чтобы открыть страницу, фреймворк собирает путь до неё, используя следующие параметры:
 * folder — задаёт строку пути до интерфейса в сторейдже.
 * type — определяет как будет выглядеть путь до страницы:
@@ -148,11 +146,10 @@ function gui:gui/create/place {args:{config:{},else:{}}}
     * 1b - folder$(page)
     * 2b - folder
 * getter — оптимизирует пути.
-    * false - score игрока page не будет использоваться(type=2).
-    * true - score игрока page будет использоваться(type=0,1).
-#### Параметры страницы
+    * false - score игрока page не будет использоваться(type=2b).
+    * true - score игрока page будет использоваться(type=0b,1b).
 * ignore_slots — слоты, в которые игрок может поместить предметы.
-* use_components — определяет будет ли массив компонентов прибавлен к предмета на странице.
+* use_components — определяет будет ли массив компонентов прибавлен к предметам на странице.
 * use_save — определяет сохранение положенных предметов.
     * false - вернуть положенные предметы игроку.
     * true - сохранить на странице.
@@ -163,16 +160,24 @@ function gui:gui/create/place {args:{config:{},else:{}}}
     false - не загружать.
     true - загрузить.
 * use_load+ — определяет загрузку компонентов.
-    false - не загружать.
-    true - загрузить.
-
-Параметры type, getter, components, save, save+, load, load+ копируются в одноимённые скорборды игрока, а параметры folder, ignore_slots, on_change, on_close в сторейдж игрока `container`.
+    * false - не загружать.
+    * true - загрузить.
+Параметр page копируется копируется в одноимённый скорборд игрока. Другие параметры копируются в сторейдж игрока `container`. Потом вы можете редактировать параметры командами:
+```
+data modify storage gui:main container.config.{folder,type,getter,ignore_slots,use_components,use_save,use_save+,use_load,use_load+} set value {value}
+```
+```
+data modify storage storage gui:main container.{on_change,on_close,components} set value {value}
+```
+```
+scoreboard players set/add/remove @s page {value}
+```
 ## Создание страниц
-Страница в  фреймворке это просто массив специальных предметов(смотрите ниже), такой же как, например, у бочки, расположенный в сторейдже gui:main. **Все предметы и компоненты на странице должны быть помечены тегом null:1b!**
+Страница в  фреймворке это просто массив специальных предметов, такой же как, например, у бочки, расположенный в сторейдже gui:main. **Все предметы и компоненты на странице должны быть помечены тегом null:1b!**
 ## Создание кнопок
 Для создания кнопок существуют теги link и commands.
 ### Тег link
-Данный тег вызывает поведение смены параметров пути, то есть, если поместить ваши команды сюда, при нажатии на кнопку фреймворк будет пытаться сохранить и загружить контекст, также вы можете использовать сохранение страницы или возвращение к предыдущей с помощью команд:
+Данный тег вызывает поведение смены параметров пути, то есть, если поместить ваши команды сюда, при нажатии на кнопку фреймворк будет пытаться сохранить и загрузить контекст, также вы можете использовать сохранение страницы или возвращение к предыдущей с помощью команд:
 ```mcfunction
 function gui:hooks/save_history
 
@@ -185,17 +190,17 @@ function gui:hooks/back
 
 Когда игрок открывает эндер сундук, запускается функция `gui:search/start`, в которой мы пытаемся найти маркер с тегом `gui` одним из двух способов: рейкаст или поиск сущности с помощью distance. С помощью некоторой id логики, мы можем отследить, что игрок открыл или закрыл gui. При открытии интерфейса запускается функция `gui:search/help/temp`, в которой с помощью макросов мы копируем сторейдж игрока `gui:main gui_cash.ID` в `gui:main container`, в него переносим все параметры из маркера,также запускаем команды из него, и затем, сторейдж `gui:main container` сохраняется обратно в `gui:main gui_cash.ID`. Также при первом открытии мы добавляем все сохранённые контексты если этого требуют параметры, загружаем страницу, используя функцию `gui:gui/refresh/mask`.
 
-Далее каждый тик маркер будет получать тег active, и запускать функцию `gui:gui/tick`, в ней исполнение с помощью id переходит к игрокам, и с помощью макросов мы снова получаем сторейдж `gui:main container` со всеми данными игрока, который доступен везде далее, и сохраняется в игрока по окончанию всех процессов.
+Далее каждый тик маркер будет получать тег `active`, и запускать функцию `gui:gui/tick`, в ней исполнение с помощью id переходит к игрокам, и с помощью макросов мы снова получаем сторейдж `gui:main container` со всеми данными игрока, который доступен везде далее, и сохраняется в игрока по окончанию всех процессов.
 
 Итак, мы пытаемся скопировать содержимое эндер сундука в сторейдж `gui:main container.EnderItems`. Если нам это удалось запускается функция `gui:gui/refresh/main`. 
 
 В ней мы говорим фреймворку убить все предметы, помеченные тегом `null:1b`.
 
-Здесь мы записываем в переменную `#shift main_score` был ли предмет с тегом `null:1b` в инвентаре игрока,очищаем у игрока все предметы помеченные тегом `null:1b`, записывая в score `#buttons main_score`.
+Здесь мы записываем в переменную `#shift main_score` был ли предмет с тегом `null:1b` в инвентаре игрока, очищаем у игрока все предметы помеченные тегом `null:1b`, записывая в score `#buttons main_score`.
 
 Копируем предметы эндер сундука в сторейдж `gui:main return` и удаляем все предметы, также помеченные тегом `null:1b`, оставшиеся предметы при надобности пропускаем через функцию, которая удалит все разрешённые тегом `ignore_slots` слоты из массива `return`, и создаст другой массив `gui:main container.save`. Если что-то осталось в массиве `return`, возвращаем предметы игроку через шалкер на координатах `0 -64 0`. 
 
-Если счёт игрока `#buttons main_score` равен 1 и больше, обрабатываем кнопки. Для этого, вычисляем все предметы на странице: копируем все предметы из пути, загружаем компоненты если нужно. Из него вычитаем массив предметов эндер сундука игрока. Если оставшийся предмет имеет теги `link` или `commands` обрабатываем их с помощью цикла с макросами. Тег `link` перед этим запускает функцию `gui:gui/refresh/change_with_behavior`, в которой обрабатывается сохранение контекста.
+Если счёт `#buttons main_score` равен 1, обрабатываем кнопки. Для этого, вычисляем все предметы на странице: копируем все предметы из пути, загружаем компоненты если нужно. Из него вычитаем массив предметов эндер сундука игрока. Если оставшийся предмет имеет теги `link` или `commands` обрабатываем их с помощью цикла с макросами. Тег `link` перед этим запускает функцию `gui:gui/refresh/change_with_behavior`, в которой обрабатывается сохранение контекста.
 
 После кнопок исполняется массив команд смены страницы `on_change`.
 
@@ -206,4 +211,3 @@ function gui:hooks/back
 Обобщённая схема всех процессов:
 
 поиск → открытие → сравнение → возвращение → кнопки → загрузка → закрытие
-
